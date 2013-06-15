@@ -1,0 +1,5 @@
+if(WIN32)
+    include(${CMAKE_SOURCE_DIR}/cmake/platform/windows.cmake)
+else()
+    include(${CMAKE_SOURCE_DIR}/cmake/platform/unix.cmake)
+endif()
