@@ -14,13 +14,15 @@
 #include <iostream>
 
 #define DefineLogLevel(NAME, LOGLEVEL) \
-void NAME (std::string const& str, ...) \
-{ \
-    va_list append; \
-    va_start(append, str); \
-    logMsg<LOGLEVEL>(str, append); \
-    va_end(append); \
-}
+    void NAME (std::string const& str, ...) \
+    { \
+        if (!Log::NeedsLog( LOGLEVEL )) \
+            return; \
+        va_list append; \
+        va_start(append, str); \
+        logMsg<LOGLEVEL>(str, append); \
+        va_end(append); \
+    }
 
 class Log : public Singleton<Log>
 {
@@ -28,25 +30,25 @@ public:
     enum Level
     {
         LOG_INFO,
-        LOG_WARNING,
         LOG_ERROR,
+        LOG_WARNING,
         LOG_FATAL,
         LOG_DEBUG,
         LOG_MAX_LOGLEVEL
     };
 
     Log() : curColorLevel(LOG_MAX_LOGLEVEL) {}
-    ~Log() {}
+    ~Log() { Reset(); }
 
     DefineLogLevel(outInfo    , LOG_INFO    );
-    DefineLogLevel(outWarning , LOG_WARNING );
     DefineLogLevel(outError   , LOG_ERROR   );
+    DefineLogLevel(outWarning , LOG_WARNING );
     DefineLogLevel(outFatal   , LOG_FATAL   );
     DefineLogLevel(outDebug   , LOG_DEBUG   );
 
     std::ostream& GetDirectOStreamForLogLevel(Level level);
 
-    void Reset() { SetColorForLoglevel(LOG_INFO); }
+    void Reset();
 
 private:
     template <Level LOGLEVEL>
@@ -76,6 +78,7 @@ private:
     uint8 curColorLevel;
 
     inline bool IsErrorLevel(Level level) const { return level == LOG_ERROR || level == LOG_FATAL; }
+    static bool NeedsLog(Level level);
 };
 
 #undef DefineLogLevel

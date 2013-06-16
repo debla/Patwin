@@ -20,4 +20,6 @@ typedef uint64_t uint64;
 
 typedef wchar_t wchar;
 
+#define RETURN_IF_FALSE( EXPR ) { if (! EXPR ) return false; }
+
 #endif // Includes_h

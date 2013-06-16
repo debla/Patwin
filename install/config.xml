@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Patwin>
+    <!-- Connection                    -->
+    <bounding>0.0.0.0</bounding>
+    <!--     Default: 0.0.0.0          -->
+    <port>80</port>
+    <!--     Default: 80               -->
+
+    <!-- Working Directory             -->
+    <workingdir>./htdocs</workingdir>
+    <!--     Default: ./htdocs         -->
+    
+    <!-- Logging                       -->
+    <loglevel>3</loglevel>
+    <!--              1 - Info         -->
+    <!--              2 - Error        -->
+    <!--     Default: 3 - Warning      -->
+    <!--              4 - Fatal        -->
+    <!--              5 - Debug        -->
+    <patwin_log>patwin.log</patwin_log>
+    <!--     Default: patwin.log       -->
+    <access_log>access.log</access_log>
+    <!--     Default: access.log       -->
+</Patwin>

@@ -4,8 +4,16 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 # pragma once
-#endif 
+#endif
 
+#include <boost/mime.hpp>
+#include <boost/network/protocol/http/server.hpp>
+#include "Log.hpp"
+#include "Config.hpp"
 
+class Patwin
+{
+
+};
 
 #endif // Patwin_h
