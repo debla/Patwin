@@ -3,15 +3,18 @@
     <!-- Connection                    -->
     <bounding>0.0.0.0</bounding>
     <!--     Default: 0.0.0.0          -->
-    <port>80</port>
-    <!--     Default: 80               -->
+    <port>8080</port>
+    <!--     Default: 8080             -->
 
     <!-- Working Directory             -->
-    <workingdir>./htdocs</workingdir>
+    <workingdir>/htdocs</workingdir>
     <!--     Default: ./htdocs         -->
     
     <!-- Logging                       -->
-    <loglevel>3</loglevel>
+    <!--    Console Loglevel           -->
+    <console_loglevel>5</console_loglevel>
+    <!--    File Loglevel              -->
+    <file_loglevel>5</file_loglevel>
     <!--              1 - Info         -->
     <!--              2 - Error        -->
     <!--     Default: 3 - Warning      -->
@@ -19,6 +22,4 @@
     <!--              5 - Debug        -->
     <patwin_log>patwin.log</patwin_log>
     <!--     Default: patwin.log       -->
-    <access_log>access.log</access_log>
-    <!--     Default: access.log       -->
 </Patwin>

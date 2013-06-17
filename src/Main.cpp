@@ -1,39 +1,20 @@
+
 /*
+    Copyright (C) 2013 Denis Blank
 
-#include <iostream>
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-
-namespace http = boost::network::http;
-
-struct handler;
-typedef http::server<handler> http_server;
-
-using namespace std;
-
-struct handler
-{
-    void operator() (http_server::request const& request,
-                     http_server::response& response)
-    {
-        std::string const ip = request.source;
-        std::string const dest = request.destination;
-
-
-        std::cout << "Ip: " << ip << "\nDestination: " << dest << endl << endl;
-
-        response = http_server::response::stock_reply(
-            http_server::response::ok, "Hello, world!");
-    }
-
-    void log(http_server::string_type const &info)
-    {
-        std::cerr << "ERROR: " << info << '\n';
-    }
-};
-
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 
 #include "Config.hpp"
 #include "Log.hpp"
@@ -45,12 +26,6 @@ int main(int argc, char* argv[])
     if (!sConfig.Load(argc, argv))
         return EXIT_FAILURE;
 
-    /*
-
-    handler handler_;
-    http_server server_("0.0.0.0", "8000", handler_);
-    server_.run();
-    */
-
-    return EXIT_SUCCESS;
+    PatwinServerObject patwin(new Patwin());
+    return patwin->run();
 }

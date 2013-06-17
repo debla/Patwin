@@ -1,4 +1,21 @@
 
+/*
+    Copyright (C) 2013 Denis Blank
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #ifndef Log_h
 #define Log_h
 
@@ -46,8 +63,6 @@ public:
     DefineLogLevel(outFatal   , LOG_FATAL   );
     DefineLogLevel(outDebug   , LOG_DEBUG   );
 
-    std::ostream& GetDirectOStreamForLogLevel(Level level);
-
     void Reset();
 
 private:
@@ -62,14 +77,7 @@ private:
 #else
         vsnprintf(msg, size, str.c_str(), append);
 #endif
-        {
-            SetColorForLoglevel(LOGLEVEL);
-            if (IsErrorLevel(LOGLEVEL))
-                std::cerr << msg << std::endl;
-            else
-                std::cout << msg << std::endl;
-        }
-
+        LogMessage(LOGLEVEL, msg);
         delete[] msg;
     }
 
@@ -78,7 +86,13 @@ private:
     uint8 curColorLevel;
 
     inline bool IsErrorLevel(Level level) const { return level == LOG_ERROR || level == LOG_FATAL; }
-    static bool NeedsLog(Level level);
+    static bool NeedsConsoleLog(Level level);
+    static bool NeedsFileLog(Level level);
+    static bool NeedsLog(Level level) { return NeedsConsoleLog(level) || NeedsFileLog(level); }
+
+    static std::string const NameForLogLevel[];
+
+    void LogMessage(Level level, char* msg);
 };
 
 #undef DefineLogLevel

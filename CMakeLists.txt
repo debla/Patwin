@@ -6,7 +6,7 @@ include(CheckCXXSourceRuns)
 include(CheckIncludeFiles)
 
 if(CMAKE_COMPILER_IS_GNUCXX)
-    SET(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
+    # SET(CMAKE_CXX_FLAGS "-std=c++11 ${CMAKE_CXX_FLAGS}")
 endif()
 
 add_subdirectory(cmake)
@@ -24,6 +24,16 @@ include_directories (
 file(GLOB_RECURSE sources src/*.cpp src/*.h src/*.hpp install/*.xml)
 source_group(Source FILES ${sources})
 
+if( WIN32 )
+    SET(sources 
+        ${sources}
+        ${CMAKE_SOURCE_DIR}/src/Patwin.rc
+    )
+
+    add_custom_command(TARGET Patwin POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/install" "${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)")
+endif()
+
 add_executable(Patwin
     ${sources}
 )
@@ -33,7 +43,3 @@ target_link_libraries(Patwin
     TinyXML
 )
 
-if( WIN32 )
-    add_custom_command(TARGET Patwin POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/install" "${CMAKE_BINARY_DIR}/bin/$(ConfigurationName)")
-endif()

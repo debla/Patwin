@@ -5,5 +5,8 @@ cd Patwin
 
 cmake ~/Dropbox/Patwin -DBOOST_ROOT="/home/denis/Devel/boost_1_53_0/"
 
-make
+cp ~/Dropbox/Patwin/install/config.xml ~/Build/Patwin/config.xml
+mkdir htdocs
+cp ~/Dropbox/Patwin/install/htdocs/* -R  ~/Build/Patwin/htdocs/
 
+make
