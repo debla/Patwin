@@ -40,9 +40,13 @@ struct handler
         if (request.destination == "/")
             request.destination = "/index.html";
 
-        sLog.outDebug("IP: %s requested file \"%s\".", request.source.c_str(), request.destination.c_str());
+        sLog.outDebug("IP: %s requested file \"%s\".",
+                      request.source.c_str(),
+                      request.destination.c_str());
 
-        std::string const rFile = sConfig.getStringConfig(Config::PATH) + sConfig.getStringConfig(Config::WORKING_DIR) + request.destination;
+        std::string const rFile = sConfig.getStringConfig(Config::PATH) +
+                                  sConfig.getStringConfig(Config::WORKING_DIR) +
+                                  request.destination;
 
         std::ostringstream ss;
         std::ifstream file((char const*)rFile.c_str(), std::ios::binary);

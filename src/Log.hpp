@@ -70,7 +70,7 @@ private:
     void logMsg(std::string const& str, va_list const& append)
     {
         uint32 const size = 4096;
-        char* msg = new char[4096];
+        char* msg = new char[size];
 
 #ifdef WIN32
         vsprintf_s(msg, size, str.c_str(), append);

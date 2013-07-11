@@ -12,7 +12,7 @@
     
     <!-- Logging                       -->
     <!--    Console Loglevel           -->
-    <console_loglevel>5</console_loglevel>
+    <console_loglevel>2</console_loglevel>
     <!--    File Loglevel              -->
     <file_loglevel>5</file_loglevel>
     <!--              1 - Info         -->

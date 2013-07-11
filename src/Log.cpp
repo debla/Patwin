@@ -16,14 +16,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include "Log.hpp"
-
 #include <string>
 #include <iostream>
 #include <memory>
 #include <fstream>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/date_time/posix_time/posix_time_io.hpp>
+#include "Log.hpp"
 #include "Config.hpp"
 
 #ifdef WIN32
